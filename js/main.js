@@ -145,7 +145,7 @@ function setupGUI(config) {
 	$("#titletext").html(config.text.intro);
 
 	if (config.text.more) {
-		$("#information").html(config.text.more + "<br /><br />Built on technology developed by the <a href=\"http://www.oii.ox.ac.uk/\">Oxford Internet Institute</a> and <a href=\"http://jisc.ac.uk/\">JISC</a>.");
+		$("#information").html(config.text.more + "<br /><br />Built on technology developed by the <a href=\"http://www.oii.ox.ac.uk/\">Oxford Internet Institute</a> and <a href=\"http://jisc.ac.uk/\">JISC</a>. Full source available on <a href=\"https://github.com/darkoverload/socint\">GitHub</a>.");
 	} else {
 		$("#moreinformation").hide();
 	}

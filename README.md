@@ -1,5 +1,8 @@
+
 # Social Intelligence Project (socint)
 An interactive social research platform developed to further the public understanding of foreign social media operations. I am making this project available to the community in hopes that it can be used to help make social media a better place for everyone. This project will be updated as new data becomes available, when bugs are fixed, or when new functionality is added.
+
+**You can view this project live on GitHub Pages by clicking [here](https://darkoverload.github.io/socint/).**
 
 ## Interface
 Standard mouse navigation is used to pan and zoom around the map. Clicking a node shows more information about it. Clicking the account link at the top of the information panel opens a new window/tab with the selected node's account. Clicking any of the node links under mutual, incoming, or outgoing will select that node. I've added functionality which allows the forward and back buttons to be used to navigate previous node selections.
