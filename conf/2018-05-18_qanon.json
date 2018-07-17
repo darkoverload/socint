@@ -1,0 +1,53 @@
+{
+  "type": "network",
+  "version": "1.0",
+  "data": "data/2018-05-18_qanon.json",
+  "logo": {
+    "text": "Overload Industries",
+    "file": "images/logo.png",
+    "link": ""
+  },
+  "text": {
+    "title": "Twitter Social Network Analysis of the hashtag #QAnon",
+    "more": "This social network map contains <strong>1,000 nodes</strong> with <strong>57,918 edges</strong>, and was built using a selection of <strong>1,918,933 tweets</strong> from <strong>94,912 users</strong> captured during a <em>period of time starting from 08:00 UTC on the morning of 20 Apr 2018 until 07:59 UTC on the morning of 18 May 2018</em>.<br /><br />All tweets containing the tracked hashtag during this time period were used in the creation of this dataset. Only the top 1,000 participants were selected for inclusion in this sociogram, which were then filtered to include only those connected with the giant component as well as to remove self-looping edges. Click on any node in the map to get more detailed account information and highlight all of it's connections. Clicking any node link in the information panel or search results has the same effect.",
+    "intro": "This is an interactive social network map of the core participants using the hashtag on Twitter starting on the morning of 20 Apr 2018 until the morning of 18 May 2018."
+  },
+  "legend": {
+    "edgeLabel": "Mention Tweet",
+    "colorLabel": "Modularity Class",
+    "nodeLabel": "Twitter Account"
+  },
+  "features": {
+    "search": true,
+    "groupSelectorAttribute": false,
+    "hoverBehavior": "default"
+  },
+  "informationPanel": {
+    "imageAttribute": false,
+    "groupByEdgeDirection": true
+  },
+  "sigma": {
+    "graphProperties": {
+      "minEdgeSize": 1.0,
+      "maxNodeSize": 5.0,
+      "maxEdgeSize": 8.0,
+      "minNodeSize": 1.0
+    },
+    "drawingProperties": {
+      "labelThreshold": 4,
+      "hoverFontStyle": "bold",
+      "defaultEdgeType": "curve",
+      "defaultLabelColor": "#fff",
+      "defaultLabelHoverColor": "#ff0000",
+      "defaultLabelSize": 14,
+      "activeFontStyle": "bold",
+      "fontStyle": "bold",
+      "defaultHoverLabelBGColor": "#002147",
+      "defaultLabelBGColor": "#ddd"
+    },
+    "mouseProperties": {
+      "minRatio": 0.75,
+      "maxRatio": 100
+    }
+  }
+}
