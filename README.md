@@ -1,0 +1,2 @@
+# socint
+Social Intelligence Project
