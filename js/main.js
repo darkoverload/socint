@@ -2,7 +2,7 @@ var sigInst, canvas, $GP
 var config = {};
 
 //Automatically load configuration file
-jQuery.getJSON("conf/2018-07-13_qanon.json", function (data, textStatus, jqXHR) {
+jQuery.getJSON("conf/2018-07-13_maga.json", function (data, textStatus, jqXHR) {
 	config = data;
 
 	if (config.type != "network") {
