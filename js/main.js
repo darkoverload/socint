@@ -655,18 +655,18 @@ function nodeActive(a) {
 			bl.push("<span><strong>BotLogic Score:</strong> " + blResp.score + "</span><br/>");
 			bl.push("<span><strong>BotLogic Timestamp:</strong> " + blResp.found_timestamp + "</span><br/>");
 			$GP.info_botlogic.html("<br/>" + bl.join("<br/>"));
-			$GP.info_botlogic.show();
 		} else if (blResp && blResp.search_status == "normal user") {
 			bl.push("<span><strong>BotLogic Type:</strong> Normal User</span><br/>");
 			$GP.info_botlogic.html("<br/>" + bl.join("<br/>"));
-			$GP.info_botlogic.show();
+		} else if (blResp && blResp.search_status == "not found") {
+			bl.push("<span><strong>BotLogic Error:</strong> Not Found</span><br/>");
+			$GP.info_botlogic.html("<br/>" + bl.join("<br/>"));
 		} else {
 			$GP.info_botlogic.hide();
 		}
 	}).error(function(jqXhr, textStatus, error) {
 		console.log("ERROR: " + textStatus + ", " + error);
 		$GP.info_botlogic.html("<br/><span><strong>BotLogic Error:</strong> " + error + "</span><br/>");
-		$GP.info_botlogic.show();
 	});
 
 	$GP.info_data.show();
