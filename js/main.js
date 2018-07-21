@@ -645,20 +645,29 @@ function nodeActive(a) {
 
 	var blResp, bl = [];
 
-	// DISABLED UNTIL CORS FIXED @BOTLOGIC
-	/* jQuery.getJSON("https://botlogic.io/?sn=" + b.label + "&json=true", function (data, textStatus, jqXHR) {
+	// USING PROXY UNTIL CORS FIXED @BOTLOGIC
+	$GP.info_botlogic.html("<br/><span><strong>BotLogic Loading...</strong></span><br/>");
+	$GP.info_botlogic.show();
+	jQuery.getJSON("https://cors.io/?https://botlogic.io/?sn=" + b.label + "&json=true", function (data, textStatus, jqXHR) {
 		blResp = data;
-	}); */
-
-	if (blResp && blResp.search_status == "found") {
-		bl.push("<span><strong>BotLogic Type:</strong> " + blResp.type_string + "</span><br/>");
-		bl.push("<span><strong>BotLogic Score:</strong> " + blResp.score + "</span><br/>");
-		bl.push("<span><strong>BotLogic Timestamp:</strong> " + blResp.found_timestamp + "</span><br/>");
-		$GP.info_botlogic.html(bl.join("<br/>"));
+		if (blResp && blResp.search_status == "found") {
+			bl.push("<span><strong>BotLogic Type:</strong> " + blResp.type_string + "</span><br/>");
+			bl.push("<span><strong>BotLogic Score:</strong> " + blResp.score + "</span><br/>");
+			bl.push("<span><strong>BotLogic Timestamp:</strong> " + blResp.found_timestamp + "</span><br/>");
+			$GP.info_botlogic.html("<br/>" + bl.join("<br/>"));
+			$GP.info_botlogic.show();
+		} else if (blResp && blResp.search_status == "normal user") {
+			bl.push("<span><strong>BotLogic Type:</strong> Normal User</span><br/>");
+			$GP.info_botlogic.html("<br/>" + bl.join("<br/>"));
+			$GP.info_botlogic.show();
+		} else {
+			$GP.info_botlogic.hide();
+		}
+	}).error(function(jqXhr, textStatus, error) {
+		console.log("ERROR: " + textStatus + ", " + error);
+		$GP.info_botlogic.html("<br/><span><strong>BotLogic Error:</strong> " + error + "</span><br/>");
 		$GP.info_botlogic.show();
-	} else {
-		$GP.info_botlogic.hide();
-	}
+	});
 
 	$GP.info_data.show();
 	$GP.info_p.html("Connections");
