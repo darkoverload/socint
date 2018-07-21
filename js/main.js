@@ -1,5 +1,6 @@
 var sigInst, canvas, $GP
 var config = {};
+var autoPush = false;
 
 //Automatically load configuration file
 jQuery.getJSON("conf/2018-07-13_maga.json", function (data, textStatus, jqXHR) {
@@ -181,6 +182,7 @@ function setupGUI(config) {
 	$GP.info_name = $GP.info.find(".name");
 	$GP.info_link = $GP.info.find(".link");
 	$GP.info_data = $GP.info.find(".data");
+	$GP.info_botlogic = $GP.info.find(".botlogic");
 	$GP.info_close = $GP.info.find(".returntext");
 	$GP.info_close2 = $GP.info.find(".close");
 	$GP.info_p = $GP.info.find(".p");
@@ -362,10 +364,14 @@ function configSigmaElements(config) {
 						id: a.id
 					})
 				});
+				autoPush = true;
 				nodeActive(c[0].id);
+				autoPush = false;
 			}
 		else {
+			autoPush = true;
 			nodeNormal();
+			autoPush = false;
 		}
 	});
 
@@ -491,7 +497,10 @@ function nodeNormal() {
 			a.attr.color = !1;
 			a.attr.lineWidth = !1;
 			a.attr.size = !1
-		}), sigInst.draw(2, 2, 2, 2), sigInst.neighbors = {}, sigInst.active = !1, $GP.calculating = !1, window.location.hash = "")
+		}), sigInst.draw(2, 2, 2, 2), sigInst.neighbors = {}, sigInst.active = !1, $GP.calculating = !1/*, window.location.hash = ""*/)
+		if (autoPush == false) {
+			history.pushState(null, null, document.location.pathname);
+		}
 }
 
 // Select active node
@@ -570,7 +579,7 @@ function nodeActive(a) {
 		d = "";
 		for (g in e) {
 			c = e[g];
-			f.push('<li class="membership"><div class="smallpill" style="background: ' + c.colour + ';"></div><a href="#' + c.name + '" onmouseover="sigInst._core.plotter.drawHoverNode(sigInst._core.graph.nodesIndex[\'' + c.id + '\'])\" onclick=\"nodeActive(\'' + c.id + '\')" onmouseout="sigInst.refresh()">' + c.name + "</a></li>");
+			f.push('<li class="membership"><div class="smallpill" style="background: ' + c.colour + ';"></div><a onmouseover="sigInst._core.plotter.drawHoverNode(sigInst._core.graph.nodesIndex[\'' + c.id + '\'])\" onclick=\"nodeActive(\'' + c.id + '\')" onmouseout="sigInst.refresh()">' + c.name + "</a></li>");
 		}
 		return f;
 	}
@@ -629,6 +638,28 @@ function nodeActive(a) {
 		// Image field for attribute pane
 		$GP.info_data.html(e.join("<br/>"))
 	}
+
+	// Debug
+	// var time = new Date();
+	// console.log("DEBUG(" + time.getTime() + "): " + arguments.callee.caller.toString());
+
+	var blResp, bl = [];
+
+	// DISABLED UNTIL CORS FIXED @BOTLOGIC
+	/* jQuery.getJSON("https://botlogic.io/?sn=" + b.label + "&json=true", function (data, textStatus, jqXHR) {
+		blResp = data;
+	}); */
+
+	if (blResp && blResp.search_status == "found") {
+		bl.push("<span><strong>BotLogic Type:</strong> " + blResp.type_string + "</span><br/>");
+		bl.push("<span><strong>BotLogic Score:</strong> " + blResp.score + "</span><br/>");
+		bl.push("<span><strong>BotLogic Timestamp:</strong> " + blResp.found_timestamp + "</span><br/>");
+		$GP.info_botlogic.html(bl.join("<br/>"));
+		$GP.info_botlogic.show();
+	} else {
+		$GP.info_botlogic.hide();
+	}
+
 	$GP.info_data.show();
 	$GP.info_p.html("Connections");
 	$GP.info.animate({
@@ -637,7 +668,9 @@ function nodeActive(a) {
 	$GP.info_donnees.hide();
 	$GP.info_donnees.show();
 	sigInst.active = a;
-	window.location.hash = b.label;
+	if (autoPush == false) {
+		history.pushState(null, null, document.location.pathname + '#' + b.label);
+	}
 }
 
 // Show node cluster
@@ -663,6 +696,7 @@ function showCluster(a) {
 		sigInst.draw(2, 2, 2, 2);
 		$GP.info_name.html("<b>" + a + "</b>");
 		$GP.info_data.hide();
+		$GP.info_botlogic.hide();
 		$GP.info_p.html("Group Members");
 		$GP.info_link.find("ul").html(f.join(""));
 		$GP.info.animate({

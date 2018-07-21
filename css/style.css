@@ -166,6 +166,10 @@ padding-top: 2px;
 cursor:pointer;
 }
 
+#attributepane .link li:hover {
+color: red;
+}
+
 #attributepane .p {
 padding-top: 10px;
 font-weight: bold;
